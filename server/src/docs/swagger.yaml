@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Todo API Specification
+  version: '34'
+  description: API documentation for the Todo bounded context.
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development Server
+tags:
+  - name: Todo
+    description: Operations related to the Todo bounded context.
+paths:
+  /create-todo:
+    post:
+      summary: Create Todo
+      description: Executes the "Create Todo" command. ...
+      operationId: createTodo
+      tags:
+        - Todo
+      responses:
+        '201':
+          description: 'Created: The resource was created successfully.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '202':
+          description: 'Accepted: The command has been accepted for processing.'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodoRequest'
+  /update-todo:
+    post:
+      summary: Update Todo
+      description: Executes the "Update Todo" command. ...
+      operationId: updateTodo
+      tags:
+        - Todo
+      responses:
+        '201':
+          description: 'Created: The resource was created successfully.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '202':
+          description: 'Accepted: The command has been accepted for processing.'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTodoRequest'
+  /complete-todo:
+    post:
+      summary: Complete Todo
+      description: Executes the "Complete Todo" command. ...
+      operationId: completeTodo
+      tags:
+        - Todo
+      responses:
+        '201':
+          description: 'Created: The resource was created successfully.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '202':
+          description: 'Accepted: The command has been accepted for processing.'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteTodoRequest'
+  /delete-todo:
+    post:
+      summary: Delete Todo
+      description: Executes the "Delete Todo" command. ...
+      operationId: deleteTodo
+      tags:
+        - Todo
+      responses:
+        '201':
+          description: 'Created: The resource was created successfully.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '202':
+          description: 'Accepted: The command has been accepted for processing.'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTodoRequest'
+  /fetch-user-todos:
+    get:
+      summary: Fetch User Todos
+      description: Retrieves data based on the "Fetch User Todos" query. This is a synchronous query operation.
+      operationId: fetchUserTodos
+      tags:
+        - Todo
+      responses:
+        '200':
+          description: Successful retrieval of data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /fetch-todo-details:
+    get:
+      summary: Fetch Todo Details
+      description: Retrieves data based on the "Fetch Todo Details" query. This is a synchronous query operation.
+      operationId: fetchTodoDetails
+      tags:
+        - Todo
+      responses:
+        '200':
+          description: Successful retrieval of data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: An error occurred.
+        code:
+          type: string
+          example: ERROR_CODE
+    Todo:
+      type: object
+      description: Represents a Todo in the system.
+      properties:
+        todoID:
+          type: integer
+          description: The Todo ID of the Todo.
+          example: '1'
+        todoTitle:
+          type: string
+          description: The Todo Title of the Todo.
+          example: Buy groceries
+        description:
+          type: string
+          description: The Description of the Todo.
+          example: Weekly shopping
+        dueDate:
+          type: string
+          description: The Due Date of the Todo.
+          example: '2023-10-15'
+        priorityLevel:
+          type: string
+          description: The Priority Level of the Todo.
+          example: High
+        category:
+          type: string
+          description: The Category of the Todo.
+          example: Personal
+        tags:
+          type: string
+          description: The Tags of the Todo.
+          example: Shopping
+        completionDate:
+          type: string
+          description: The Completion Date of the Todo.
+          example: '2023-10-16'
+        completionNotes:
+          type: string
+          description: The Completion Notes of the Todo.
+          example: All items bought
+      required:
+        - todoID
+        - todoTitle
+    CreateTodoRequest:
+      type: object
+      properties:
+        todoTitle:
+          type: string
+          example: Buy groceries
+        description:
+          type: string
+          example: Weekly shopping
+        dueDate:
+          type: string
+          example: '2023-10-15'
+        priorityLevel:
+          type: string
+          example: High
+        category:
+          type: string
+          example: Personal
+        tags:
+          type: string
+          example: Shopping
+      required:
+        - todoTitle
+    UpdateTodoRequest:
+      type: object
+      properties:
+        todoID:
+          type: integer
+          example: '1'
+        newTitle:
+          type: string
+        newDescription:
+          type: string
+        newDueDate:
+          type: string
+        newPriorityLevel:
+          type: string
+        newCategory:
+          type: string
+        newTags:
+          type: string
+      required:
+        - todoID
+    CompleteTodoRequest:
+      type: object
+      properties:
+        todoID:
+          type: integer
+          example: '1'
+        completionDate:
+          type: string
+          example: '2023-10-16'
+        completionNotes:
+          type: string
+          example: All items bought
+      required:
+        - todoID
+    DeleteTodoRequest:
+      type: object
+      properties:
+        todoID:
+          type: integer
+          example: '1'
+        deletionReason:
+          type: string
+      required:
+        - todoID
+  parameters:
+    TodoId:
+      name: todoID
+      in: path
+      required: true
+      description: The unique identifier for the Todo.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: 'Bad Request: The server cannot or will not process the request due to something that is perceived to be a client error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: 'Not Found: The server can not find the requested resource.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: 'Internal Server Error: The server has encountered a situation it doesn''t know how to handle.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
