@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Todo API Specification
-  version: '34'
+  version: '44'
   description: API documentation for the Todo bounded context.
 servers:
   - url: http://localhost:3000/api/v1
@@ -18,18 +18,14 @@ paths:
       tags:
         - Todo
       responses:
-        '201':
-          description: 'Created: The resource was created successfully.'
+        '200':
+          description: 'OK: The resource was updated successfully.'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-        '202':
-          description: 'Accepted: The command has been accepted for processing.'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
       requestBody:
         required: true
         content:
@@ -44,18 +40,14 @@ paths:
       tags:
         - Todo
       responses:
-        '201':
-          description: 'Created: The resource was created successfully.'
+        '200':
+          description: 'OK: The resource was updated successfully.'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-        '202':
-          description: 'Accepted: The command has been accepted for processing.'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
       requestBody:
         required: true
         content:
@@ -70,18 +62,14 @@ paths:
       tags:
         - Todo
       responses:
-        '201':
-          description: 'Created: The resource was created successfully.'
+        '200':
+          description: 'OK: The resource was updated successfully.'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-        '202':
-          description: 'Accepted: The command has been accepted for processing.'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
       requestBody:
         required: true
         content:
@@ -96,18 +84,14 @@ paths:
       tags:
         - Todo
       responses:
-        '201':
-          description: 'Created: The resource was created successfully.'
+        '200':
+          description: 'OK: The resource was updated successfully.'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-        '202':
-          description: 'Accepted: The command has been accepted for processing.'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
       requestBody:
         required: true
         content:
@@ -132,8 +116,6 @@ paths:
                   $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
   /fetch-todo-details:
     get:
       summary: Fetch Todo Details
@@ -152,8 +134,6 @@ paths:
                   $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     Error:
@@ -162,15 +142,12 @@ components:
         message:
           type: string
           example: An error occurred.
-        code:
-          type: string
-          example: ERROR_CODE
     Todo:
       type: object
       description: Represents a Todo in the system.
       properties:
         todoID:
-          type: integer
+          type: string
           description: The Todo ID of the Todo.
           example: '1'
         todoTitle:
@@ -235,7 +212,7 @@ components:
       type: object
       properties:
         todoID:
-          type: integer
+          type: string
           example: '1'
         newTitle:
           type: string
@@ -255,7 +232,7 @@ components:
       type: object
       properties:
         todoID:
-          type: integer
+          type: string
           example: '1'
         completionDate:
           type: string
@@ -269,7 +246,7 @@ components:
       type: object
       properties:
         todoID:
-          type: integer
+          type: string
           example: '1'
         deletionReason:
           type: string
